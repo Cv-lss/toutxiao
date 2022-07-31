@@ -104,7 +104,7 @@ export default {
         this.$store.commit('SET_TOKEN', token)
 
         // 登录成功后跳转页面
-        this.$router.push('/profile')
+        this.$router.push('/my')
 
         // 登录成功后的提示
         this.$toast.success('登录成功')

@@ -1,7 +1,9 @@
 <template>
   <div>
+    <!-- 二级路由 -->
     <router-view></router-view>
 
+    <!-- 底部标签栏 -->
     <van-tabbar route inactive-color="#265686fd">
       <van-tabbar-item
         v-for="(item, index) in tabbarData"
