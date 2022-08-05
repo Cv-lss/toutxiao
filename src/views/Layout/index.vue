@@ -58,7 +58,7 @@ export default {
   align-items: center;
   justify-content: space-evenly;
   height: 100%;
-  font-size: 30px;
+  font-size: 25px;
   .toutiao {
     font-size: 40px;
   }
