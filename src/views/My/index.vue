@@ -1,7 +1,10 @@
 <template>
   <div>
     <header>
-      <div class="login" v-if="isLogin">登录后的盒子</div>
+      <div class="login" v-if="isLogin">
+        <button @click="$router.push('/user')">编辑资料</button>
+        登录后的盒子
+      </div>
       <div class="logout" v-else>未登录后的盒子</div>
     </header>
 
