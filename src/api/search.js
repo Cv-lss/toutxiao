@@ -13,3 +13,16 @@ export const getSearchSuggestionsApi = (q) => {
     }
   })
 }
+
+/**
+ * 搜索结果
+ * @param {*} q 选择的哪一个关键词
+ * @returns Promise
+ */
+// 获取搜索结果 /v1_0/search
+export const getSearchResult = (params) => {
+  return request({
+    url: '/v1_0/search',
+    params
+  })
+}

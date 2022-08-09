@@ -8,7 +8,10 @@ export default new Vuex.Store({
   state: {
     // JSON.parse(localStorage.getItem('HEIMA_TOUTIAO_TOKEN'))  storage.get('HEIMA_TOUTIAO_TOKEN')
 
-    tokenObj: getToken() || {}
+    tokenObj: getToken() || {},
+
+    // 搜索关键字
+    str: []
   },
   getters: {},
   mutations: {
@@ -18,6 +21,11 @@ export default new Vuex.Store({
       // localStorage.setItem('HEIMA_TOUTIAO_TOKEN', JSON.stringify(paylod))
       // storage.set('HEIMA_TOUTIAO_TOKEN', paylod)
       setToken(paylod)
+    },
+
+    // 关键字
+    RESULTKEYWORDS(state, str) {
+      state.str = str
     }
   },
   actions: {},

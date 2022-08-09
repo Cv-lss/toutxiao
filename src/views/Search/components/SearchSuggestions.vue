@@ -6,7 +6,7 @@
       :key="index"
     >
       <template #title>
-        <span v-html="item"></span>
+        <span v-html="item" @click="searchKeyWords(index)"></span>
       </template>
     </van-cell>
   </div>
@@ -14,7 +14,8 @@
 
 <script>
 import { debounce } from 'loadsh'
-import { getSearchSuggestionsApi } from '@/api'
+import { getSearchSuggestionsApi, getSearchResult } from '@/api'
+
 export default {
   props: {
     keyWords: {
@@ -60,7 +61,22 @@ export default {
       } catch (error) {
         console.log(error)
       }
-    }, 500)
+    }, 500),
+
+    async searchKeyWords(id) {
+      // console.log(id)
+      // console.log(this.suggestions)
+      // this.$parent.$parent.keyWords = '哈哈哈'
+      const str = this.suggestions
+        .filter((item, index) => index === id)
+        .toString()
+      // console.log(str)
+      this.$emit('str', str)
+      this.$parent.isShowSearchResult = true
+      await getSearchResult({
+        q: str
+      })
+    }
   }
 }
 </script>

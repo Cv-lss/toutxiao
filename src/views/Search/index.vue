@@ -17,7 +17,12 @@
     <search-results></search-results>
     <search-history></search-history> -->
     <!-- 用动态组件来显示和隐藏哪些组价 -->
-    <component :is="componentName" :keyWords="keyWords"></component>
+    <component
+      :is="componentName"
+      :keyWords="keyWords"
+      @str="str"
+      @historyStr="historyStr"
+    ></component>
   </div>
 </template>
 
@@ -48,6 +53,7 @@ export default {
       if (this.isShowSearchResult) {
         return 'SearchResults'
       }
+      // 建议
       return 'SearchSuggestions'
     }
   },
@@ -60,6 +66,18 @@ export default {
     // 聚焦之后里面有值就显示搜索建议
     onSearchFocus() {
       this.isShowSearchResult = false
+    },
+
+    // 传过来的关键字
+    str(item) {
+      // console.log(item)
+      this.keyWords = item
+    },
+
+    // 搜索历史传过来的关键字
+    historyStr(item) {
+      // console.log(item)
+      this.keyWords = item
     }
   }
 }

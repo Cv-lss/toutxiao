@@ -60,3 +60,29 @@ export const upDataAvator = (file) => {
     data: fm
   })
 }
+
+/**
+ * 修改昵称性别和生日
+ * @param {*} data 修改的哪一项数据
+ * @returns Promise
+ */
+// 修改资料/v1_0/user/profile
+export const updataInfo = (data) => {
+  return request({
+    url: '/v1_0/user/profile',
+    method: 'PATCH',
+    data
+  })
+}
+
+/**
+ * 获取用户的个人的信息
+ * @returns Promise
+ */
+// 获取用户的个人信息接口v1_0/user
+export const getPersonalInformation = () => {
+  return request({
+    url: 'v1_0/user',
+    method: 'get'
+  })
+}

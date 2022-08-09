@@ -3,7 +3,13 @@
     <!-- 头部搜索 -->
     <van-nav-bar class="navbar">
       <template #title>
-        <van-button class="search-btn" round icon="search" @click="$router.push('/search')">搜索</van-button>
+        <van-button
+          class="search-btn"
+          round
+          icon="search"
+          @click="$router.push('/search')"
+          >搜索</van-button
+        >
       </template>
     </van-nav-bar>
 
@@ -17,9 +23,19 @@
     </van-tabs>
 
     <!-- 频道弹层 -->
-    <van-popup v-model="show" position="bottom" :style="{ height: '100%' }" closeable close-icon-position="top-left">
-      <channel-popup :myChannels="myChannels" @change_active="active = $event" @del_channel="delChannel"
-        @add_channel="addChannel">
+    <van-popup
+      v-model="show"
+      position="bottom"
+      :style="{ height: '100%' }"
+      closeable
+      close-icon-position="top-left"
+    >
+      <channel-popup
+        :myChannels="myChannels"
+        @change_active="active = $event"
+        @del_channel="delChannel"
+        @add_channel="addChannel"
+      >
       </channel-popup>
       <!-- $event在模板中自定义事件接受的值是第一个参数 -->
     </van-popup>

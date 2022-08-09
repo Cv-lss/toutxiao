@@ -1,6 +1,11 @@
 <template>
   <div>
-    <van-nav-bar title="个人信息" left-arrow @click-left="$router.back()" />
+    <van-nav-bar
+      title="个人信息"
+      left-arrow
+      @click-left="$router.back()"
+      class="info-navbar"
+    />
 
     <van-cell title="头像" is-link @click="$refs.file.click()">
       <van-image round width="0.8rem" height="0.8rem" :src="userInfo.photo" />
@@ -25,26 +30,83 @@
         @updata-avator="userInfo.photo = $event"
       ></updata-avator>
     </van-popup>
+
+    <!-- 昵称 -->
+    <van-cell
+      title="昵称"
+      is-link
+      @click="updataNickname"
+      :value="userInfo.name"
+    >
+    </van-cell>
+
+    <!-- 修改昵称弹出层 -->
+    <van-popup
+      v-model="isShowNickname"
+      :style="{ height: '100%', width: '100%' }"
+    >
+      <updata-nickname
+        @isShowNickname="isShowNickname"
+        :userInfo="userInfo"
+      ></updata-nickname>
+    </van-popup>
+
+    <!-- 性别 -->
+    <van-cell
+      title="性别"
+      is-link
+      @click="updataSex"
+      :value="userInfo.gender === 1 ? '女' : '男'"
+    >
+    </van-cell>
+    <van-popup v-model="isShowSex" position="bottom" :style="{ height: '45%' }">
+      <updata-sex :userInfo="userInfo"></updata-sex>
+    </van-popup>
+
+    <!-- 生日 -->
+    <van-cell
+      title="生日"
+      is-link
+      @click="updataBirthday"
+      :value="userInfo.birthday"
+    ></van-cell>
+    <!-- 修改昵称弹出层 -->
+    <van-popup
+      v-model="isShowBirthday"
+      position="bottom"
+      :style="{ height: '50%' }"
+    >
+      <updata-birthday :userInfo="userInfo"></updata-birthday>
+    </van-popup>
   </div>
 </template>
 
 <script>
 import UpdataAvator from './components/UpdataAvator.vue'
+import UpdataNickname from './components/UpdataNickname.vue'
+import UpdataSex from './components/UpdataSex.vue'
+import UpdataBirthday from './components/UpdataBirthday.vue'
 import { getUserInfo } from '@/api'
 import { resolveToBase64 } from '@/utils'
 export default {
   name: 'User',
-  components: { UpdataAvator },
+  components: { UpdataAvator, UpdataNickname, UpdataSex, UpdataBirthday },
   data() {
     return {
       userInfo: {},
+      gender: '',
       show: false,
-      photo: ''
+      photo: '',
+      isShowNickname: false,
+      isShowSex: false,
+      isShowBirthday: false,
+      birthday: ''
     }
   },
   mounted() {
     this.getUserInfo()
   },
+
   methods: {
     async getUserInfo() {
       try {
@@ -81,13 +143,29 @@ export default {
       this.photo = url
       e.target.value = ''
       this.show = true
+    },
+
+    // 显示昵称组件
+    updataNickname() {
+      // console.log(111)
+      this.isShowNickname = true
+    },
+
+    // 性别
+    updataSex() {
+      this.isShowSex = true
+    },
+
+    // 生日
+    updataBirthday() {
+      this.isShowBirthday = true
     }
   }
 }
 </script>
 
 <style scoped lang="less">
-:deep(.van-nav-bar) {
+:deep(.info-navbar) {
   background-color: #3296fa;
 
   .van-nav-bar__title {
